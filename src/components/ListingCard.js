@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-function ListingCard({ listing, deleteListing }) {
+function ListingCard({ listing, deleteListingId }) {
   const [favorite, setFavorite]=useState(false)
  
   function handleFavorites(){
      setFavorite((favorite) =>!favorite)
   }
   function handleDeleteClick(){
-    deleteListing(listing)
+    deleteListingId(listing)
   }
 
   return (

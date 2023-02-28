@@ -8,30 +8,29 @@ function App() {
 
   useEffect(() => {
     fetch("http://localhost:6001/listings")
-    .then(res => res.json())
-    .then(setListingData);
+      .then(res => res.json())
+      .then(setListingData);
    
   },[])
-  
-const [onDeleteListing , setOnDeleteListing ] =useState()
 
- const deleteListing = (listing)=>{
-  fetch(`http://localhost:6001/listings/${listingData.id}`, {
+ const deleteListing = () => {
+    fetch(`http://localhost:6001/listings/${listingData.id}`, {
     method: "DELETE",
-  })
-  .then(res => res.json())
-  .then((listing) => onDeleteListing(listing));
+    })
+      .then(res => res.json())
+      .then((listing) => setListingData(listing))
+    }
 
-
-}
-
-
+    function deleteListingId(deletedlisting){
+       listingData.filter((listing) => listing.id !== deletedlisting.id)
+    }
+    
   return (
     <div className="app">
       <Header />
       <ListingsContainer 
       listingData={listingData}
-      deleteListing={deleteListing}
+      deleteListingId={deleteListingId}
       />
     </div>
   );
